@@ -1,0 +1,15 @@
+ScraperSIASS:
+  login:
+    accept_btn: '//button[@class="btn btn-warning"]'
+  advance_search:
+    search_btn: '//h4[@class="panel-title"]/a[@data-toggle="collapse"]'
+    filter_btn: '//input[@class="btn btn-primary"]'
+  load_ss_options:
+    load: '//a[@class="btn btn-default btn-sm"]'
+  change_page:
+    change_page_btn: '//ul[@class="pagination"]/li/a[@rel="next"]'
+SocialServicePage:
+  title: '//h3'
+  responsable: '//div[@class="col-md-6" and ./h4[contains(text(),"Información del responsable")]]/table/tbody'
+  coordinator: '//div[@class="col-md-6" and ./h4[contains(text(),"Información del coordinador")]]/table/tbody'
+  activities:
