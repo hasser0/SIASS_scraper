@@ -11,6 +11,13 @@ class SocialServicePage:
         with open('xpath.yaml', 'r') as file:
             self.xpath = yaml.safe_load(file)['SocialServicePage']
 
+    def read_table(self, table_xpath):
+        keys = self.driver.find_elements_by_xpath(table_xpath + '/tr/th')
+        values = self.driver.find_elements_by_xpath(table_xpath + '/tr/td')
+        table = {key.text:value.text for key, value in zip(keys,values)}
+        return table
+
+
     @property
     def title(self):
         title_xpath = self.xpath['title']
@@ -22,24 +29,26 @@ class SocialServicePage:
     @property
     def responsable(self):
         resp_xpath = self.xpath['responsable']
-        keys = self.driver.find_elements_by_xpath(resp_xpath + '/tr/th')
-        values = self.driver.find_elements_by_xpath(resp_xpath + '/tr/td')
-        resp = {key.text:value.text for key, value in zip(keys,values)}
-        return resp
+        return self.read_table(resp_xpath)
 
     @property
     def coordinator(self):
         coor_xpath = self.xpath['coordinator']
-        keys = self.driver.find_elements_by_xpath(coor_xpath + '/tr/th')
-        values = self.driver.find_elements_by_xpath(coor_xpath + '/tr/td')
-        coor = {key.text:value.text for key, value in zip(keys,values)}
-        return coor
+        table = self.read_table(coor_xpath)
+        if table == {}:
+            table['Nombre completo'] = '-'
+            table['E-mail'] = '-'
+        return table
 
     @property
     def activities(self):
-        pass
+        act_xpath = self.xpath['activities']
+        act = self.driver.find_elements_by_xpath(act_xpath + '/tr/td')
+        act = act[1].text
+        return act
 
     @property
-    def objetive(self):
-        pass
+    def general(self):
+        obj_xpath = self.xpath['general']
+        return self.read_table(obj_xpath)
         

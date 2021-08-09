@@ -12,4 +12,5 @@ SocialServicePage:
   title: '//h3'
   responsable: '//div[@class="col-md-6" and ./h4[contains(text(),"Información del responsable")]]/table/tbody'
   coordinator: '//div[@class="col-md-6" and ./h4[contains(text(),"Información del coordinador")]]/table/tbody'
-  activities:
+  activities: '//div[@class="col-sm-6"]/table/tbody'
+  general: '//div[@class="col-sm-6" and ./h4[contains(text(),"Información general")]]/table/tbody'

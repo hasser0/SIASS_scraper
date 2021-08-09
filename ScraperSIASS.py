@@ -1,4 +1,3 @@
-from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -95,31 +94,3 @@ class ScraperSIASS:
 
     def quit(self):
         self.driver.quit()
-
-
-if __name__ == '__main__':
-    driver = webdriver.Chrome('./chromedriver')
-    spider = ScraperSIASS(driver)
-    spider.login(account='316281841', faculty='38', career='21')
-    options = {
-        FilterSIASS.EJE: '2',
-        FilterSIASS.UBICACION: '9'
-    }
-    spider.advance_search(options)
-    links = []
-    while True:
-        links += spider.get_ss_links()
-        if spider.change_page():
-            break
-    for link in links:
-        sleep(3)
-        page = SocialServicePage(driver, link)
-        print(page.responsable)
-        print()
-
-    options = {
-        FilterSIASS.EJE: '13',
-        FilterSIASS.UBICACION: '9'
-    }
-    spider.quit()
-    
