@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import Select
-from time import sleep
 from tabulate import tabulate
 import selenium
 import yaml
@@ -75,7 +74,6 @@ class ScraperSIASS:
     def get_ss_links(self):
         driver = self.driver
         ss_xpath = self.xpath['load_ss_options']['load']
-        sleep(5)
         options = driver.find_elements_by_xpath(ss_xpath)
         links = [option.get_attribute('href') for option in options]
         return links

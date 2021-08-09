@@ -47,6 +47,12 @@ class SocialServicePage:
         return act.text
 
     @property
+    def availability(self):
+        ava_xpath = self.xpath['availability']
+        ava = self.driver.find_element_by_xpath(ava_xpath)
+        return ava.text
+
+    @property
     def general(self):
         obj_xpath = self.xpath['general']
         return self.read_table(obj_xpath)

@@ -1,7 +1,6 @@
 from tabulate import tabulate
 from ScraperSIASS import ScraperSIASS, FilterSIASS
 from SocialServicePage import SocialServicePage
-from time import sleep
 from selenium import webdriver
 
 def main():    
@@ -18,22 +17,19 @@ def main():
         links += spider.get_ss_links()
         if spider.change_page():
             break
-    report = [['Programa', 'Responsable', 'Coordinador', 'Actividades', 'Objetivo']]
-    for link in links:
-        sleep(1)
-        page = SocialServicePage(driver, link)
-        resp = page.responsable
-        coor = page.coordinator
-        general = page.general
-        print('Programa: ' + page.title)
-        print('Responsable: '+resp['Nombre completo']+'  =>  '+resp['E-mail'])
-        print('Coordinador: '+coor['Nombre completo']+'  =>  '+coor['E-mail'])
-        print('Actividades: '+page.activities)
-        print('Objetivo: '+general['Objetivo'])
-        print('*'*50)
-        print('*'*50)
+    with open('report.txt', 'wt') as file:
+        for link in links:
+            page = SocialServicePage(driver, link)
+            resp = page.responsable
+            coor = page.coordinator
+            general = page.general
+            file.write('Programa: ' + page.title+ '\n')
+            file.write('Responsable: '+resp['Nombre completo']+'  =>  '+resp['E-mail']+'\n')
+            file.write('Coordinador: '+coor['Nombre completo']+'  =>  '+coor['E-mail']+'\n')
+            file.write('Actividades: '+page.activities+'\n')
+            file.write('Disponibilidad: '+page.availability+'\n')
+            file.write('Objetivo: '+general['Objetivo']+'\n\n')
     spider.quit()
-    
 
 
 if __name__ == '__main__':
