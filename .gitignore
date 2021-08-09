@@ -2,4 +2,4 @@ __pycache__/
 venv/
 chromedriver
 results.png
-report.pdf
+report.txt
