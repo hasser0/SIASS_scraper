@@ -43,9 +43,8 @@ class SocialServicePage:
     @property
     def activities(self):
         act_xpath = self.xpath['activities']
-        act = self.driver.find_elements_by_xpath(act_xpath + '/tr/td')
-        act = act[1].text
-        return act
+        act = self.driver.find_element_by_xpath(act_xpath)
+        return act.text
 
     @property
     def general(self):
